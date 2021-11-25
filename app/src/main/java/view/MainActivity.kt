@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
-import model.WeatherUI
+import model.WeatherRetrofit
 import viewModel.WeatherViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: WeatherViewModel
     private lateinit var binding : ActivityMainBinding
     private val adapter : WeatherAdapter = WeatherAdapter()
-    private val observer = Observer<List<WeatherUI>> {
+    private val observer = Observer<List<WeatherRetrofit>> {
         adapter.submitList(it)
     }
 

@@ -6,19 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.ItemWeatherBinding
-import model.WeatherUI
+import model.WeatherRetrofit
 
-val diffUtils = object : DiffUtil.ItemCallback<WeatherUI>() {
-    override fun areItemsTheSame(oldItem: WeatherUI, newItem: WeatherUI): Boolean {
+val diffUtils = object : DiffUtil.ItemCallback<WeatherRetrofit>() {
+    override fun areItemsTheSame(oldItem: WeatherRetrofit, newItem: WeatherRetrofit): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: WeatherUI, newItem: WeatherUI): Boolean {
+    override fun areContentsTheSame(oldItem: WeatherRetrofit, newItem: WeatherRetrofit): Boolean {
         return oldItem == newItem
     }
 }
 
-class WeatherAdapter : ListAdapter<WeatherUI, WeatherViewHolder>(diffUtils) {
+class WeatherAdapter : ListAdapter<WeatherRetrofit, WeatherViewHolder>(diffUtils) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         return WeatherViewHolder(ItemWeatherBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -31,9 +31,9 @@ class WeatherAdapter : ListAdapter<WeatherUI, WeatherViewHolder>(diffUtils) {
 
 class WeatherViewHolder(val binding: ItemWeatherBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    private lateinit var ui: WeatherUI
+    private lateinit var ui: WeatherRetrofit
 
-    fun bind(weatherUi: WeatherUI) {
+    fun bind(weatherUi: WeatherRetrofit) {
         /*Glide.with(itemView.context)
             .load(weatherUi.iconUrl)
             .into(binding.itemChuckNorrisIcon)*/

@@ -2,14 +2,16 @@ package architecture
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import dao.WeatherDao
-import model.DataWeather
+import model.WeatherRetrofit
 
+@TypeConverters(Converters::class)
 @Database(
     entities = [
-        DataWeather::class
+        WeatherRetrofit::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 

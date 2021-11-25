@@ -7,18 +7,14 @@ import androidx.lifecycle.viewModelScope
 import architecture.WeatherRoomDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import model.DataWeather
-import model.WeatherUI
+import model.WeatherRetrofit
 import repository.WeatherRepository
 
 class WeatherViewModel : ViewModel() {
 
     private val mWeatherRepository: WeatherRepository by lazy { WeatherRepository() }
 
-    var mWeatherLiveData: LiveData<List<WeatherUI>> =
-        mWeatherRepository.selectAllWeather().map {
-            it.toUi()
-        }
+    var mWeatherLiveData: LiveData<List<WeatherRetrofit>> = mWeatherRepository.selectAllWeather()
 
     fun fetchNewWeather() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,8 +28,8 @@ class WeatherViewModel : ViewModel() {
         }
     }
 }
-
-private fun List<DataWeather>.toUi(): List<WeatherUI> {
+/*
+private fun List<WeatherRetrofit>.toUi(): List<WeatherUI> {
     return asSequence().map {
         WeatherUI(
             temperature = it.temperature,
@@ -42,3 +38,4 @@ private fun List<DataWeather>.toUi(): List<WeatherUI> {
         )
     }.toList()
 }
+*/

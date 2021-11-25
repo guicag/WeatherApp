@@ -5,17 +5,16 @@ import architecture.CustomApplication
 import architecture.RetrofitBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import model.DataWeather
 import model.WeatherRetrofit
 
 class WeatherRepository {
     private val mWeatherDao = CustomApplication.instance.mWeatherDatabase.myWeatherDao()
 
-    fun selectAllWeather(): LiveData<List<DataWeather>> {
+    fun selectAllWeather(): LiveData<List<WeatherRetrofit>> {
         return mWeatherDao.selectAll()
     }
 
-    private suspend fun insertWeather(dataWeather: DataWeather) =
+    private suspend fun insertWeather(dataWeather: WeatherRetrofit) =
         withContext(Dispatchers.IO) {
             mWeatherDao.insert(dataWeather)
         }
@@ -28,6 +27,6 @@ class WeatherRepository {
         insertWeather(RetrofitBuilder.getWeather().getWeatherParis().toRoom())
     }
 }
-private fun WeatherRetrofit.toRoom(): DataWeather {
-    return DataWeather(temperature = temperature, wind = wind, description = description)
+private fun WeatherRetrofit.toRoom(): WeatherRetrofit {
+    return WeatherRetrofit(temperature = temperature, wind = wind, description = description)
 }

@@ -6,14 +6,16 @@ import androidx.room.PrimaryKey
 
 
 /** Object use for UI **/
+/*
 data class WeatherUI(
     val temperature:String,
     val wind:String,
     val description:String
-)
+)*/
 
 /** Object use for room */
-@Entity(tableName = "weather")
+
+/*
 data class DataWeather(
 
     @ColumnInfo(name = "temperature")
@@ -27,5 +29,5 @@ data class DataWeather(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-}
+}*/
 

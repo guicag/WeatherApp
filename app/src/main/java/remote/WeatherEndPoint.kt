@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface WeatherEndPoint {
 
-    @GET("Paris")
+    @GET("London")
     suspend fun getWeatherParis() : WeatherRetrofit
 
 }
