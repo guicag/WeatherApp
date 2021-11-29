@@ -9,7 +9,7 @@ import model.DataWeather
     entities = [
         DataWeather::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 

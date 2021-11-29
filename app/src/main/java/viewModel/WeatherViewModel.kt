@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import architecture.WeatherRoomDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import model.DataWeather
@@ -38,7 +37,8 @@ private fun List<DataWeather>.toUi(): List<WeatherUI> {
         WeatherUI(
             temperature = it.temperature,
             wind = it.wind,
-            description = it.description
+            description = it.description,
+            forecastDetails = it.forecastDetails
         )
     }.toList()
 }

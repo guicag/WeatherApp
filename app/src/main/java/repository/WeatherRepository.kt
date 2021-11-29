@@ -15,9 +15,9 @@ class WeatherRepository {
         return mWeatherDao.selectAll()
     }
 
-    private suspend fun insertWeather(dataWeather: DataWeather) =
+    private suspend fun insertWeatherWithForecast(dataWeatherWithForecast: DataWeather) =
         withContext(Dispatchers.IO) {
-            mWeatherDao.insert(dataWeather)
+            mWeatherDao.insert(dataWeatherWithForecast)
         }
 
     suspend fun deleteAllWeather() = withContext(Dispatchers.IO) {
@@ -25,9 +25,9 @@ class WeatherRepository {
     }
 
     suspend fun fetchData() {
-        insertWeather(RetrofitBuilder.getWeather().getWeatherParis().toRoom())
+        insertWeatherWithForecast(RetrofitBuilder.getWeather().getWeatherParis().toRoom())
     }
 }
 private fun WeatherRetrofit.toRoom(): DataWeather {
-    return DataWeather(temperature = temperature, wind = wind, description = description)
+    return DataWeather(description = description, wind = wind, temperature = temperature, forecastDetails = forecastRetrofit)
 }
