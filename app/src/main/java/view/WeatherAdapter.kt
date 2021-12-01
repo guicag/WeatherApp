@@ -56,6 +56,7 @@ class WeatherViewHolder(val binding: ItemWeatherBinding) : RecyclerView.ViewHold
                 .into(binding.imageWeather)
         }
         ui = weatherUi
+        binding.textDate.text = weatherUi.date
         binding.textCity.text = weatherUi.city
         binding.textWind.text = weatherUi.wind
         binding.textTemperature.text = weatherUi.temperature

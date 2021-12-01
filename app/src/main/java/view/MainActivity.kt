@@ -1,9 +1,11 @@
 package view
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,14 +14,18 @@ import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
 import model.WeatherUI
 import viewModel.WeatherViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: WeatherViewModel
     private lateinit var binding : ActivityMainBinding
     private val adapter : WeatherAdapter = WeatherAdapter()
+    private var count: Int = 0
     private val observer = Observer<List<WeatherUI>> {
         adapter.submitList(it)
+        count++
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
