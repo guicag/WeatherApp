@@ -24,10 +24,10 @@ class WeatherRepository {
         mWeatherDao.deleteAll()
     }
 
-    suspend fun fetchData() {
-        insertWeatherWithForecast(RetrofitBuilder.getWeather().getWeatherParis().toRoom())
+    suspend fun fetchData(city: String) {
+        insertWeatherWithForecast(RetrofitBuilder.getWeather().getWeatherCity(city).toRoom(city))
     }
 }
-private fun WeatherRetrofit.toRoom(): DataWeather {
-    return DataWeather(description = description, wind = wind, temperature = temperature, forecastDetails = forecastRetrofit)
+private fun WeatherRetrofit.toRoom(city: String): DataWeather {
+    return DataWeather(city = city,description = description, wind = wind, temperature = temperature)
 }

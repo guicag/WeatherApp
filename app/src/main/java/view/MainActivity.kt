@@ -2,6 +2,8 @@ package view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,8 +32,21 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         binding.recyclerView.adapter = adapter
 
+        val spinner: Spinner = findViewById(R.id.cities_spinner)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.cities_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
         binding.buttonAddWeather.setOnClickListener {
-            viewModel.fetchNewWeather()
+            viewModel.fetchNewWeather(spinner.selectedItem.toString())
         }
 
         binding.buttonDeleteWeather.setOnClickListener {

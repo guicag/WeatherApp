@@ -17,9 +17,6 @@ data class WeatherRetrofit(
     @SerializedName("description")
     val description: String,
 
-    @Expose
-    @SerializedName("forecast")
-    val forecastRetrofit: List<DataForecastDetail>
 )
 
 

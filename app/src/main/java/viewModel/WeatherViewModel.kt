@@ -19,9 +19,9 @@ class WeatherViewModel : ViewModel() {
             it.toUi()
         }
 
-    fun fetchNewWeather() {
+    fun fetchNewWeather(city: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            mWeatherRepository.fetchData()
+            mWeatherRepository.fetchData(city)
         }
     }
 
@@ -35,10 +35,10 @@ class WeatherViewModel : ViewModel() {
 private fun List<DataWeather>.toUi(): List<WeatherUI> {
     return asSequence().map {
         WeatherUI(
+            city = it.city,
             temperature = it.temperature,
             wind = it.wind,
             description = it.description,
-            forecastDetails = it.forecastDetails
         )
     }.toList()
 }

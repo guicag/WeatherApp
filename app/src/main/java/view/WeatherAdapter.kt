@@ -1,7 +1,9 @@
 package view
 
+import android.app.ProgressDialog.show
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +20,7 @@ val diffUtils = object : DiffUtil.ItemCallback<WeatherUI>() {
     }
 }
 
-class WeatherAdapter : ListAdapter<WeatherUI, WeatherViewHolder>(diffUtils) {
+class WeatherAdapter() : ListAdapter<WeatherUI, WeatherViewHolder>(diffUtils) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         return WeatherViewHolder(ItemWeatherBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -27,6 +29,7 @@ class WeatherAdapter : ListAdapter<WeatherUI, WeatherViewHolder>(diffUtils) {
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
 }
 
 class WeatherViewHolder(val binding: ItemWeatherBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -34,10 +37,10 @@ class WeatherViewHolder(val binding: ItemWeatherBinding) : RecyclerView.ViewHold
     private lateinit var ui: WeatherUI
 
     fun bind(weatherUi: WeatherUI) {
-        /*Glide.with(itemView.context)
-            .load(weatherUi.iconUrl)
-            .into(binding.itemChuckNorrisIcon)*/
+
+        //var strTemp = weatherUi.temperature.replace("+", "").replace(" °C", "")
         ui = weatherUi
+        binding.textCity.text = weatherUi.city
         binding.textWind.text = weatherUi.wind
         binding.textTemperature.text = weatherUi.temperature
         binding.textDescription.text = weatherUi.description
