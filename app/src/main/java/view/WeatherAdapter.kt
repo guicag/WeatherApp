@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ItemWeatherBinding
 import model.WeatherUI
 
@@ -38,7 +40,21 @@ class WeatherViewHolder(val binding: ItemWeatherBinding) : RecyclerView.ViewHold
 
     fun bind(weatherUi: WeatherUI) {
 
-        //var strTemp = weatherUi.temperature.replace("+", "").replace(" °C", "")
+        var strTemp = weatherUi.temperature.replace("+", "").replace(" °C", "").toInt()
+        when (strTemp) {
+            in -100 .. 5 -> Glide.with(itemView.context)
+                .load("https://images.emojiterra.com/openmoji/v13.1/512px/2744.png")
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(binding.imageWeather)
+            in 5 .. 20    -> Glide.with(itemView.context)
+                .load("https://cdn-0.emojis.wiki/emoji-pics/microsoft/cloud-microsoft.png")
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(binding.imageWeather)
+            else -> Glide.with(itemView.context)
+                .load("https://cdn.emojidex.com/emoji/seal/white_sun_with_rays.png?1422536271")
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(binding.imageWeather)
+        }
         ui = weatherUi
         binding.textCity.text = weatherUi.city
         binding.textWind.text = weatherUi.wind
